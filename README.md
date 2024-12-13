@@ -68,6 +68,7 @@ $ yarn run start:prod
 ```bash
 # unit tests
 $ yarn run test
+```
 
 ## Example of requests
 
@@ -83,4 +84,7 @@ TODO (OpenTelemetry)
 2. Improve error handling.
 3. Add support for other APIs besides Dexscreener.
 4. Implement additional tests.
+
+```
+
 ```
