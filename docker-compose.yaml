@@ -1,0 +1,34 @@
+services:
+  search-bar-backend:
+    container_name: search-bar-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    depends_on:
+      - search-bar-redis
+    restart: always
+    networks:
+      - token.network
+
+  search-bar-redis:
+    container_name: search-bar-redis
+    image: redis:7.0
+    env_file:
+      - .env
+    ports:
+      - '6379:6379'
+    command: ['redis-server', '--appendonly', 'yes']
+    restart: always
+    networks:
+      - token.network
+
+volumes:
+  pgdata:
+
+networks:
+  token.network:
+    driver: bridge
