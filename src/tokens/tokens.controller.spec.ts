@@ -1,15 +1,19 @@
 import { TokensController } from "./tokens.controller";
 import { TokensService } from "./tokens.service";
+import { MetricsService } from 'src/metrics/metrics.service';
 
 
 jest.mock('./tokens.service');
+jest.mock('src/metrics/metrics.service');
 
 describe('TokensController', () => {
     let tokensController: TokensController;
     let tokensService: jest.Mocked<TokensService>;
+    let metricsService: jest.Mocked<MetricsService>;
 
     beforeEach(() => {
-        tokensService = new TokensService({} as any, {} as any) as jest.Mocked<TokensService>;
+        tokensService = new TokensService({} as any, {} as any, {} as any) as jest.Mocked<TokensService>;
+        metricsService = new MetricsService() as jest.Mocked<MetricsService>;
         tokensController = new TokensController(tokensService);
     });
 

@@ -11,6 +11,9 @@ The data is retrieved through integration with the Dexscreener API, and the resu
 - **NestJS**
 - **Redis**
 - **Docker** + **Docker Compose**
+- **OpenTelemetry** (for distributed tracing and metrics)
+- **Prometheus** (for metrics collection)
+- **Jaeger** (for distributed tracing)
 
 ---
 
@@ -76,15 +79,24 @@ $ yarn run test
 
 ## Metrics
 
-TODO (OpenTelemetry)
+This project uses **OpenTelemetry** for collecting metrics and traces. The following telemetry services are set up:
+
+### Prometheus Metrics
+
+- Metrics are exposed on the following endpoint: http://localhost:9464/metrics.
+- You can view your metrics in **Prometheus** at http://localhost:9090.
+- Make sure Prometheus is configured to scrape metrics from the backend (refer to `prometheus.yml`).
+
+### Jaeger Tracing
+
+- Distributed traces are sent to **Jaeger** and are available at http://localhost:16686.
+- **Jaeger** UI provides insights into the application's traces, which allows you to monitor and debug the flow of requests across different services.
+- Service name: `search-bar-backend`
+- You can see traces related to various operations like searchTokens in the **Jaeger** interface.
 
 ## TODO
 
-1. Implement additional metrics.
-2. Improve error handling.
+1. Implement additional metrics (e.g., error counts, latencies).
+2. Improve error handling and logging.
 3. Add support for other APIs besides Dexscreener.
 4. Implement additional tests.
-
-```
-
-```

@@ -1,0 +1,8 @@
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+  - job_name: 'openTelemetry'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['search-bar-backend:9464']

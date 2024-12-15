@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { SearchTokensDto } from './dto/search-tokens.dto';
 import { ApiClient } from '../utils/api.client';
 import { CacheService } from 'src/cache/cache.service';
+import { MetricsService } from 'src/metrics/metrics.service';
 
 @Injectable()
 export class TokensService {
@@ -11,10 +12,13 @@ export class TokensService {
     constructor(
         private readonly cacheService: CacheService,
         private readonly apiClient: ApiClient,
+        private readonly metricsService: MetricsService,
     ) {}
 
     async searchTokens(searchTokensDto: SearchTokensDto): Promise<any> {
         const { query } = searchTokensDto;
+
+        this.metricsService.requestCount.add(1, { endpoint: 'searchTokens' });
 
         try {
             const start = Date.now();
